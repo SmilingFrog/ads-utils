@@ -31,7 +31,7 @@ public class Arrays {
 		return isSortedInAscending || isSortedInDescending;
 	}
 
-	private static void testNull(Comparable[] array) {
+	private static void testNull(Object array) {
 		if (array == null) {
 			throw new IllegalArgumentException("argument can not be null");
 		}
@@ -88,6 +88,54 @@ public class Arrays {
 	public static boolean isSorted(Comparable[] array, Order order) {
 		testNull(array);
 		return isSorted(array, 0, array.length - 1, order);
+	}
+
+	/**
+	 * Searches the element in the array using sequential search. 
+	 * The array does not need to be sorted. Does not change the array.
+	 * The element to search can not be null.
+	 * Complexity: O(N)
+	 * @return index of the first occurrence of the element
+	 * in the array. If the element is not in the array returns -1;
+	 * @param array the array to check
+	 * @param element the element to look for
+	 * @throws IllegalArgumentException if either argument is null
+	 * 
+	 */
+	public static int search(Comparable[] array, Comparable element) {
+		testNull(array);
+		testNull(element);
+		int firstIndex = 0;
+		int lastIndex = array.length - 1;
+		return search(array, firstIndex, lastIndex, element);
+	}
+
+	/**
+	 * Searches the element in the array using sequential search. 
+	 * The element to search can not be null.
+	 * The array does not need to be sorted. Does not change the array.
+	 * Complexity: O(N)
+	 * @return index of the first occurrence of the element
+	 * in the array. If the element is not in the array returns -1;
+	 * @param array the array to check
+	 * @param firstIndex first index of the range to search within the array
+	 * @param lastIndex last index of the range within the array 
+	 * @param element the element to look for
+	 * @throws IllegalArgumentException if either array or element is null
+	 * @throws IndexOutOfBoundsException if either firstIndex or lastIndex 
+	 * are out of bounds of the array
+	 * 
+	 */
+	public static int search(Comparable[] array, int firstIndex, int lastIndex, Comparable element) {
+		testNull(array);
+		testNull(element);
+		checkIndexesBounds(array, firstIndex, lastIndex);
+		for(int i = firstIndex; i<= lastIndex; i++){
+			if(array[i].compareTo(element) == 0){
+				return i;
+			}
+		}
+		return -1;
 	}
 
 }
