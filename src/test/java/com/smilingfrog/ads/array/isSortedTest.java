@@ -9,7 +9,7 @@ import com.smilingfrog.ads.array.Arrays.Order;
 public class isSortedTest {
 
 	@Test(expected = IllegalArgumentException.class)
-	public void givenNullFirrstOverloadThrowsException() {
+	public void givenNullFirstOverloadThrowsException() {
 		Integer[] array = null;
 		Arrays.isSorted(array);
 	}
