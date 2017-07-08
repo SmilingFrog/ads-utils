@@ -20,7 +20,7 @@ public class Arrays {
 	 * order
 	 * @return true if the array is sorted
 	 * @param array the array to check
-	 * @throws  IllegalArgumentException
+	 * @throws  IllegalArgumentException if the argument is null
 	 */
 	public static boolean isSorted(Comparable[] array) {
 		testNull(array);
