@@ -138,4 +138,62 @@ public class Arrays {
 		return -1;
 	}
 
+	/**
+	 * Searches the element in the array using sequential search. 
+	 * The element to search can not be null.
+	 * The array does not need to be sorted. Does not change the array.
+	 * Complexity: O(N)
+	 * @return int[] array of indexes of the occurrences of the element
+	 * in the array. If the element is not in the array returns int[] array
+	 * with only one element int[0] == -1;
+	 * @param array the array to check
+	 * @param element the element to look for
+	 * @throws IllegalArgumentException if either array or element is null
+	 * 
+	 */
+	public static int[] searchAll(Comparable[] array, Comparable element) {
+		testNull(array);
+		testNull(element);
+		int firstIndex = 0;
+		int lastIndex = array.length-1;
+		return searchAll(array, firstIndex, lastIndex, element);
+	}
+
+	/**
+	 * Searches the element in the array using sequential search. 
+	 * The element to search can not be null.
+	 * The array does not need to be sorted. Does not change the array.
+	 * Complexity: O(N)
+	 * @return int[] array of indexes of the occurrences of the element
+	 * in the array. If the element is not in the array returns int[] array
+	 * with only one element int[0] == -1;
+	 * @param array the array to check
+	 * @param firstIndex first index of the range to search within the array
+	 * @param lastIndex last index of the range within the array 
+	 * @param element the element to look for
+	 * @throws IllegalArgumentException if either array or element is null
+	 * @throws IndexOutOfBoundsException if either firstIndex or lastIndex 
+	 * are out of bounds of the array
+	 * 
+	 */
+	public static int[] searchAll(Comparable[] array, int firstIndex, int lastIndex, Comparable element) {
+		testNull(array);
+		testNull(element);
+		checkIndexesBounds(array, firstIndex, lastIndex);
+		int indexesLength = array.length>0 ? array.length : 1;
+		int[] indexes = new int[indexesLength]; //!!! Need to use a resizable List here 
+		int founIndex = 0;
+		boolean isFound = false;
+		for(int i = firstIndex; i<= lastIndex; i++){
+			if(array[i].compareTo(element) == 0){
+				indexes[founIndex++] = i;
+				isFound = true;
+			}
+		}
+		if(! isFound){
+			indexes[0] = -1;
+		}
+		return indexes;
+	}
+
 }
