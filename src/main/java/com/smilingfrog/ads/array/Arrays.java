@@ -190,7 +190,7 @@ public class Arrays {
 				isFound = true;
 			}
 		}
-		if(! isFound){
+		if(!isFound){
 			indexes[0] = -1;
 		}
 		return indexes;
