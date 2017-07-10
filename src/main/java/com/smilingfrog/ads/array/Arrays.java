@@ -1,6 +1,9 @@
 package com.smilingfrog.ads.array;
 
 import com.smilingfrog.ads.array.Arrays.Order;
+import com.smilingfrog.ads.list.List;
+import com.smilingfrog.ads.list.Lists;
+import com.smilingfrog.ads.list.SinglyLinkedList;
 
 /**
  * A set of utility static methods to work with arrays
@@ -181,19 +184,20 @@ public class Arrays {
 		testNull(element);
 		checkIndexesBounds(array, firstIndex, lastIndex);
 		int indexesLength = array.length>0 ? array.length : 1;
-		int[] indexes = new int[indexesLength]; //!!! Need to use a resizable List here 
+		List<Integer> indexes = new SinglyLinkedList<>();
 		int founIndex = 0;
 		boolean isFound = false;
 		for(int i = firstIndex; i<= lastIndex; i++){
 			if(array[i].compareTo(element) == 0){
-				indexes[founIndex++] = i;
+				indexes.add(i);
 				isFound = true;
 			}
 		}
 		if(!isFound){
-			indexes[0] = -1;
+			indexes.add(-1);
 		}
-		return indexes;
+		
+		return Lists.toArray(indexes);
 	}
 
 }

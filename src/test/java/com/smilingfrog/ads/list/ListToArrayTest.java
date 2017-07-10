@@ -7,14 +7,14 @@ import org.junit.Test;
 public class ListToArrayTest {
 
 	@Test
-	public void givenListOfObjectsThatCanBeCastToIntsReturnTHeArrayOfInts() {
+	public void givenListOfObjectsThatCanBeRepresentedAsIntsReturnTHeArrayOfInts() {
 		List<Integer> list = new SinglyLinkedList<>();
 		Integer[] initialValues = { 10, 20, 30, 40 };
 		fillTheList(list, initialValues);
-		int[] array = null;
-		array = Lists.toArray(list, array);
-		assertArrayEquals(new int[] { 10, 20, 30, 40 }, array);
-
+		int[] array = null; 
+		array = Lists.toArray(list);
+		assertArrayEquals(new int[]{10, 20,30,40}, array );
+		
 	}
 
 	private void fillTheList(List<Integer> list, Integer[] initialValues) {
