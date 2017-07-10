@@ -2,6 +2,9 @@ package com.smilingfrog.ads.list;
 
 import static org.junit.Assert.*;
 
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
+
 import org.junit.Test;
 
 public class SinglyLinkedListTest {
@@ -65,14 +68,30 @@ public class SinglyLinkedListTest {
 		Integer[] initialValues = { 10, 20, 30 };
 		fillTheList(list, initialValues);
 		Integer[] valuesInTheList = new Integer[list.getSize()];
-		for(int i = 0; i<list.getSize();i++){
+		for (int i = 0; i < list.getSize(); i++) {
 			valuesInTheList[i] = list.get(i);
 		}
 		assertArrayEquals(initialValues, valuesInTheList);
 	}
 
+	@Test(expected=ConcurrentModificationException.class)
+	public void givenListSizeHasChangedDuringTheIterationThrowException() {
+		List<Integer> list = new SinglyLinkedList<>();
+		Integer[] initialValues = { 10, 20, 30, 40 };
+		fillTheList(list, initialValues);
+		Iterator<Integer> iterator = list.iterator();
+		int counter = 0;
+		while (iterator.hasNext()) {
+			if (counter == 1) {
+				list.add(new Integer(100));
+			}
+			iterator.next();
+			counter++;
+		}
+	}
+
 	private void fillTheList(List<Integer> list, Integer[] initialValues) {
-		for(Integer i : initialValues){
+		for (Integer i : initialValues) {
 			list.add(i);
 		}
 	}

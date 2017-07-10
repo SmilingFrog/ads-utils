@@ -1,5 +1,6 @@
 package com.smilingfrog.ads.list;
 
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 
 public class SinglyLinkedList<T> implements List<T> {
@@ -48,19 +49,29 @@ public class SinglyLinkedList<T> implements List<T> {
 	public Iterator<T> iterator() {
 		return new Iterator<T>(){
 			
-			int savedSize = size;
+			Node savedFirstElement = firstElement;
+			Node savedLastElement = lastElement;
 			Node currentNode = firstElement;
 			
 			@Override
 			public boolean hasNext() {
+				checkForConcurrentModification();
 				if(currentNode != null){
 					return true;
 				}
 				return false;
 			}
 
+			private void checkForConcurrentModification() {
+				if(savedFirstElement!=firstElement || 
+						savedLastElement != lastElement){
+					throw new ConcurrentModificationException();
+				}
+			}
+
 			@Override
 			public T next() {
+				checkForConcurrentModification();
 				T value = currentNode.value;
 				currentNode = currentNode.next;
 				return value;
