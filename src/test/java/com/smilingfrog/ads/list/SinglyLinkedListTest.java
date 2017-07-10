@@ -95,5 +95,98 @@ public class SinglyLinkedListTest {
 			list.add(i);
 		}
 	}
+	
+	@Test
+	public void canAddAndGetAnItemAtTheIndex0(){
+		List<Integer> list = new SinglyLinkedList<>();
+		list.add(0,new Integer(10));
+		assertEquals(10, (int) list.get(0));
+		list.add(0,new Integer(20));
+		assertEquals(20, (int) list.get(0));
+		assertEquals(10, (int) list.get(1));
+		list.add(new Integer(30));
+		assertEquals(20, (int) list.get(0));
+		assertEquals(10, (int) list.get(1));
+		assertEquals(30, (int) list.get(2));
+	}
+	
+	@Test
+	public void canAddAndGetAnItemInTheMiddleOfTheList(){
+		List<Integer> list = new SinglyLinkedList<>();
+		list.add(0,new Integer(10));
+		list.add(0,new Integer(20));
+		list.add(1,new Integer(30));
+		assertEquals(30, (int) list.get(1));
+		assertEquals(10, (int) list.get(2));
+		list.add(2,new Integer(40));
+		assertEquals(30, (int) list.get(1));
+		assertEquals(40, (int) list.get(2));
+		assertEquals(10, (int) list.get(3));
+		list.add(50);
+		assertEquals(30, (int) list.get(1));
+		assertEquals(40, (int) list.get(2));
+		assertEquals(10, (int) list.get(3));
+		assertEquals(50, (int) list.get(4));
+	}
+	
+	@Test
+	public void givenThereIs1ElementCanRemoveTheFirstElement(){
+		List<Integer> list = new SinglyLinkedList<>();
+		list.add(50);
+		assertEquals(1, list.getSize());
+		assertEquals(50, (int) list.get(0));
+		Integer removed = list.remove(0);
+		assertEquals(50, (int) removed);
+		assertEquals(0, list.getSize());
+	}
+	
+	@Test
+	public void givenThereAre2ElementsCanRemoveTheLastElement(){
+		List<Integer> list = new SinglyLinkedList<>();
+		list.add(50);
+		list.add(100);
+		Integer removed = list.remove(1);
+		assertEquals(100, (int) removed);
+		assertEquals(1, list.getSize());
+		assertEquals(50, (int) list.get(0));
+	}
+	
+	@Test
+	public void given2ElementsCanRemoveTheFirst(){
+		List<Integer> list = new SinglyLinkedList<>();
+		list.add(50);
+		list.add(100);
+		Integer removed = list.remove(0);
+		assertEquals(50, (int) removed);
+		assertEquals(1, list.getSize());
+		assertEquals(100, (int) list.get(0));
+	}
+	
+	@Test
+	public void given3ElementsCanRemoveTheSecond(){
+		List<Integer> list = new SinglyLinkedList<>();
+		list.add(50);
+		list.add(100);
+		list.add(200);
+		Integer removed = list.remove(1);
+		assertEquals(100, (int) removed);
+		assertEquals(2, list.getSize());
+		assertEquals(50, (int) list.get(0));
+		assertEquals(200, (int) list.get(1));
+	}
+	
+	@Test(expected=IndexOutOfBoundsException.class)
+	public void givenIndexLessThan0ThrowException(){
+		List<Integer> list = new SinglyLinkedList<>();
+		list.add(50);
+		list.remove(-1);
+	}
+	
+	@Test(expected=IndexOutOfBoundsException.class)
+	public void givenIndexGraterThanLastElementIndexThrowException(){
+		List<Integer> list = new SinglyLinkedList<>();
+		list.add(50);
+		list.remove(2);
+	}
 
 }

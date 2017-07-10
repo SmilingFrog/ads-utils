@@ -8,4 +8,8 @@ public interface List<T> extends Iterable<T>{
 
 	T get(int index);
 
+	void add(int index, T element);
+
+	T remove(int index);
+
 }
